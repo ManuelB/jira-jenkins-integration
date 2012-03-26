@@ -137,6 +137,16 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
+				<plugin>
+					<inherited>true</inherited>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<configuration>
+						<systemPropertyVariables>
+							<java.awt.headless>true</java.awt.headless>
+						</systemPropertyVariables>
+					</configuration>
+				</plugin>
 				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
