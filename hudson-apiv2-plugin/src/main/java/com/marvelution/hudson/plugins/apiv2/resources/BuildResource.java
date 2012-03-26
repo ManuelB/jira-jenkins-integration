@@ -62,7 +62,7 @@ public interface BuildResource {
 	 */
 	@GET
 	@Path("{jobName}/all")
-	Builds getBuilds(@PathParam("jobName") String jobName, @QueryParam("offset") @DefaultValue("-1") Integer offset,
+	Builds getBuilds(@PathParam("jobName") String jobName, @QueryParam("offset") @DefaultValue("0") Integer offset,
 					@QueryParam("count") @DefaultValue("10") Integer count) throws NoSuchJobException;
 
 	/**

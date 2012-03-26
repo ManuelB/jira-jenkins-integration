@@ -130,18 +130,44 @@ AJS.hudson.panel.toggleAssociation = function(associationId) {
  */
 AJS.hudson.panel.updatePanelContent = function() {
 	AJS.$.ajax({
-	    type : "GET",
-	    dataType: "html",
-	    data: ({
-	    	moduleName: AJS.hudson.panel.config.module,
-	    	viewName: AJS.hudson.panel.config.view,
-	    	associationId: AJS.hudson.panel.config.associationId,
-	    	objectId: AJS.hudson.panel.config.objectId
-	    }),
-	    url : AJS.hudson.panel.config.contextPath + "/secure/ViewHudsonPanelContent.jspa",
-	    success : function(html) {
-	        AJS.$('#hudsonPanelContentHtml').html(html);
-	    }
+		type : "GET",
+		dataType: "html",
+		data: ({
+			moduleName: AJS.hudson.panel.config.module,
+			viewName: AJS.hudson.panel.config.view,
+			associationId: AJS.hudson.panel.config.associationId,
+			objectId: AJS.hudson.panel.config.objectId
+		}),
+		url : AJS.hudson.panel.config.contextPath + "/secure/ViewHudsonPanelContent.jspa",
+		success : function(html) {
+			AJS.$('#hudsonPanelContentHtml').html(html);
+			AJS.$("#builds-show-more").click(AJS.hudson.panel.getMoreBuilds);
+		}
+	});
+}
+
+/**
+ * Method that handles the Show more.. click action
+ */
+AJS.hudson.panel.getMoreBuilds = function() {
+	var trigger = AJS.$(this).addClass("loading");
+	var offset = trigger.siblings(".summary").last().attr("data-offset") - 1;
+	AJS.$.ajax({
+		type : "GET",
+		dataType: "html",
+		data: ({
+			moduleName: AJS.hudson.panel.config.module,
+			viewName: AJS.hudson.panel.config.view,
+			associationId: AJS.hudson.panel.config.associationId,
+			objectId: AJS.hudson.panel.config.objectId,
+			allBuildsOffset: offset
+		}),
+		url : AJS.hudson.panel.config.contextPath + "/secure/ViewHudsonPanelContent.jspa",
+		success : function(html) {
+			trigger.remove();
+			AJS.$("#hudsonPanelContentHtml #summaries").append(AJS.$(AJS.$(html)[0]).children());
+			AJS.$("#builds-show-more").click(AJS.hudson.panel.getMoreBuilds);
+		}
 	});
 }
 

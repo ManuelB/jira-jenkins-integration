@@ -101,6 +101,9 @@ $!webResourceManager.requireResourcesForContext("hudson-admin")
 #fieldHeader ($i18n.getText("hudson.server.include.in.streams") "includeInStreams" false $action.errors)
 <input type="checkbox" name="includeInStreams" label="$i18n.getText("hudson.server.include.in.streams")" value="true" #if ($includeInStreams == true) checked="checked" #end />
 #fieldFooter ($i18n.getText("hudson.server.include.in.streams.hint"))
+#fieldHeader ($i18n.getText("hudson.server.cache.builds") "cacheBuilds" false $action.errors)
+<input type="checkbox" name="cacheBuilds" label="$i18n.getText("hudson.server.cache.builds")" value="true" #if ($cacheBuilds == true) checked="checked" #end />
+#fieldFooter ($i18n.getText("hudson.server.cache.builds.hint"))
 <tr class="buttons-container">
 	<td class="jiraformfooter">&nbsp;</td>
 	<td colspan="1">

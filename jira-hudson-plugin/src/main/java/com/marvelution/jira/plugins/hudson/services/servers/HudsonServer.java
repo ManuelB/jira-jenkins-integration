@@ -153,6 +153,22 @@ public interface HudsonServer extends Entity {
 	boolean isIncludeInStreams();
 
 	/**
+	 * Setter for the cacheBuilds
+	 * 
+	 * @param cacheBuilds <code>true</code> if the builds of the server are cached, <code>false</code> otherwise 
+	 * @since 4.5.0
+	 */
+	void setCacheBuilds(boolean cacheBuilds);
+
+	/**
+	 * Getter for the cacheBuilds
+	 * 
+	 * @return <code>true</code> if the builds of the server are cached, <code>false</code> otherwise
+	 * @since 4.5.0
+	 */
+	boolean isCacheBuilds();
+
+	/**
 	 * Getter for all the {@link HudsonAssociation} objects linked to this server
 	 * 
 	 * @return array of {@link HudsonAssociation} objects

@@ -89,6 +89,9 @@ $!webResourceManager.requireResourcesForContext("hudson-admin")
 			#if (!${serverUtils.hasAssociations($server)})
 			| <a href="DeleteServer!default.jspa?sid=${server.ID}">$i18n.getText("common.words.delete")</a>
 			#end
+			#if (${server.cacheBuilds})
+			| <a href="UpdateServer!clearCache.jspa?sid=${server.ID}">$i18n.getText("hudson.servers.clear.cache")</a>
+			#end
 			#if (!${server.defaultServer})
 			| <a href="UpdateServer!setAsDefault.jspa?sid=${server.ID}">$i18n.getText("hudson.servers.set.as.default")</a>
 			#end

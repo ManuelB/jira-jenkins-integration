@@ -100,3 +100,32 @@
 	padding: 0px;
 	margin: 0px;
 }
+
+#builds-show-more {
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	border: 1px solid #CCC;
+	display: block;
+	margin: 0 .2em 0 .2em;
+	overflow: hidden;
+	padding: .35em;
+	text-align: center;
+	cursor: pointer;
+}
+
+#builds-show-more span {
+	color: #666;
+}
+
+#builds-show-more span:hover {
+	text-decoration: underline;
+}
+
+#builds-show-more.loading {
+	background: url('images/throbber.gif') no-repeat center center;
+}
+
+#builds-show-more.loading span {
+	visibility: hidden;
+}

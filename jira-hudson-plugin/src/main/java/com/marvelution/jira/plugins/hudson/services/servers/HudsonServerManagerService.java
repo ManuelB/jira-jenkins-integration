@@ -179,7 +179,7 @@ public class HudsonServerManagerService implements HudsonServerManager {
 	 */
 	@Override
 	public HudsonServer addServer(String name, String description, String host, String publicHost) {
-		return addServer(name, description, host, publicHost, null, null, true, false);
+		return addServer(name, description, host, publicHost, null, null, true, false, false);
 	}
 
 	/**
@@ -187,7 +187,7 @@ public class HudsonServerManagerService implements HudsonServerManager {
 	 */
 	@Override
 	public HudsonServer addServer(String name, String description, String host, String username, String password) {
-		return addServer(name, description, host, host, username, password, true, false);
+		return addServer(name, description, host, host, username, password, true, false, false);
 	}
 
 	/**
@@ -195,7 +195,7 @@ public class HudsonServerManagerService implements HudsonServerManager {
 	 */
 	@Override
 	public HudsonServer addServer(String name, String description, String host, String publicHost, String username,
-					String password, boolean includeInStreams, boolean isDefault) {
+					String password, boolean includeInStreams, boolean cacheBuilds, boolean isDefault) {
 		HudsonServer server = objects.create(HudsonServer.class);
 		server.setName(name);
 		server.setHost(host);
@@ -205,6 +205,7 @@ public class HudsonServerManagerService implements HudsonServerManager {
 		server.setPassword(password);
 		server.setDefaultServer(isDefault);
 		server.setIncludeInStreams(includeInStreams);
+		server.setCacheBuilds(cacheBuilds);
 		server.save();
 		List<String> rules = whitelistManager.getRules();
 		if (!rules.contains(HudsonServerUtils.getHostWhitelistUrl(server))) {
@@ -225,7 +226,7 @@ public class HudsonServerManagerService implements HudsonServerManager {
 	public HudsonServer addServer(HudsonServer server) {
 		checkNotNull(server, "server argument may NOT be null");
 		return addServer(server.getName(), server.getDescription(), server.getHost(), server.getPublicHost(),
-			server.getUsername(), server.getPassword(), true, false);
+			server.getUsername(), server.getPassword(), true, false, false);
 	}
 
 	/**
@@ -233,7 +234,7 @@ public class HudsonServerManagerService implements HudsonServerManager {
 	 */
 	@Override
 	public HudsonServer updateServer(int serverId, String name, String description, String host, String publicHost,
-					String username, String password, boolean includeInStreams, boolean isDefault) {
+					String username, String password, boolean includeInStreams, boolean cacheBuilds, boolean isDefault) {
 		HudsonServer server = getServer(serverId);
 		checkNotNull(server, "server");
 		server.setName(name);
@@ -244,6 +245,7 @@ public class HudsonServerManagerService implements HudsonServerManager {
 		server.setPassword(password);
 		server.setDefaultServer(isDefault);
 		server.setIncludeInStreams(includeInStreams);
+		server.setCacheBuilds(cacheBuilds);
 		server.save();
 		return server;
 	}

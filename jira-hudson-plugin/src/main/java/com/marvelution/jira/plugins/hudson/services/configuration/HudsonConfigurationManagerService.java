@@ -49,6 +49,7 @@ public class HudsonConfigurationManagerService implements HudsonConfigurationMan
 	private static final String SHOW_IF_USER_MEMEBER_OF_PROJECTROLE = CONFIG_SETTING_PREFIX 
 		+ "show.if.user.member.of.projectrole";
 	private static final String SHOW_IF_ISSUE_OF_ISSUETYPE = CONFIG_SETTING_PREFIX + "show.if.issue.of.issuetype";
+	private static final String MAX_BUILDS_PER_REQUEST = CONFIG_SETTING_PREFIX + "max.builds.per.request";
 
 	private static final long PROPERTY_ID = 2L;
 	private PropertySet propertySet;
@@ -59,6 +60,7 @@ public class HudsonConfigurationManagerService implements HudsonConfigurationMan
 	private Collection<String> showIfUserMemberOfUsergroup = null;
 	private Collection<String> showIfUserMemberOfProjectRole = null;
 	private Collection<String> showIfIssueOfIssueType = null;
+	private int maxBuildsPerRequest = 0;
 
 	/**
 	 * Constructor
@@ -187,6 +189,29 @@ public class HudsonConfigurationManagerService implements HudsonConfigurationMan
 	public void setShowIfIssueOfIssueType(Collection<String> showIfIssueOfIssueType) {
 		this.showIfIssueOfIssueType = showIfIssueOfIssueType;
 		propertySet.setText(SHOW_IF_ISSUE_OF_ISSUETYPE, getCollectionAsText(showIfIssueOfIssueType));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int getMaxBuildsPerRequest() {
+		if (!propertySet.exists(MAX_BUILDS_PER_REQUEST)) {
+			setMaxBuildsPerRequest(20);
+		}
+		if (maxBuildsPerRequest <= 1) {
+			maxBuildsPerRequest = propertySet.getInt(MAX_BUILDS_PER_REQUEST);
+		}
+		return maxBuildsPerRequest;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void setMaxBuildsPerRequest(int maxBuildsPerRequest) {
+		this.maxBuildsPerRequest = maxBuildsPerRequest;
+		propertySet.setInt(MAX_BUILDS_PER_REQUEST, maxBuildsPerRequest);
 	}
 
 	/**

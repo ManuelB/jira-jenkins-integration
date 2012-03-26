@@ -94,6 +94,9 @@
 	&nbsp;
 	<input type="radio" value="false" name="timePastDateStrings" #if (!${timePastDateStrings}) checked #end> $i18n.getText("common.words.off")
 	#fieldFooter ()
+	#fieldHeader ($i18n.getText("hudson.configuration.max.builds.per.request"))
+	<input type="text" size="20" name="maxBuildsPerRequest" value="$!maxBuildsPerRequest" />
+	#fieldFooter ()
 	<tr class="buttons-container">
 		<td class="jiraformfooter">&nbsp;</td>
 		<td colspan="1">

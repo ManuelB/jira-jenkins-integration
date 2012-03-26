@@ -21,7 +21,7 @@
 #set ($server = $resultSet.getServer())
 #foreach ($build in $resultSet.getResults())
 #set ($result = "${build.result.name().toLowerCase()}")
-	<li class="summary">
+	<li id="build-${build.buildNumber}" data-offset="${build.buildNumber}" class="summary">
 		<ul class="centerSummary">
 			<li class="summaryInfo ${result}Summary">
 				<a href="${server.publicHost}/${build.jobUrl}">${build.jobName}</a> > <a href="${server.publicHost}/${build.url}">${i18n.getText("hudson.panel.build.number", $build.buildNumber)}</a>
@@ -83,6 +83,11 @@
 		</ul>
 	</li>
 	<li class="clear space"></li>
+#end
+#if ($resultSet.getResults().isHasMoreBuilds())
+	<li id="builds-show-more">
+		<span>${i18n.getText("hudson.panel.build.show.more")}</span>
+	</li>
 #end
 </ul>
 #parse ("templates/actions/build/common.vm")

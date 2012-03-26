@@ -64,14 +64,22 @@ public class BuildResourceRestImpl extends BaseRestResource implements BuildReso
 	public Builds getBuilds(String jobName, Integer offset, Integer count) {
 		Builds builds = new Builds();
 		hudson.model.Job<?, ? extends AbstractBuild<?, ?>> job = getHudsonJob(jobName);
-		if (offset > -1 && count > 0) {
+		if (offset != 0 && count > 0) {
 			log.fine("Mapping " + count + " builds from " + offset + " of job " + job.getFullName());
-			AbstractBuild<?, ?> build = job.getBuildByNumber(offset);
+			AbstractBuild<?, ?> build;
+			if (offset == -1) {
+				build = job.getLastBuild();
+			} else {
+				build = job.getNearestBuild(offset);
+			}
 			if (build != null) {
 				do {
 					builds.add(DozerUtils.getMapper().map(build, Build.class));
-					build = build.getNextBuild();
+					build = build.getPreviousBuild();
 				} while (build != null && builds.size() < count);
+				if (build != null) {
+					builds.setHasMoreBuilds(true);
+				}
 			} else {
 				throw new NoSuchBuildException(jobName, offset);
 			}
@@ -80,6 +88,7 @@ public class BuildResourceRestImpl extends BaseRestResource implements BuildReso
 			for (AbstractBuild<?, ?> build : job.getBuilds()) {
 				builds.add(DozerUtils.getMapper().map(build, Build.class));
 			}
+			builds.setHasMoreBuilds(false);
 		}
 		return builds;
 	}

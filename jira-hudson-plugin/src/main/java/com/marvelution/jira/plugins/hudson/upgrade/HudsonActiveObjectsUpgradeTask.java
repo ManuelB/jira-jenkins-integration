@@ -244,7 +244,7 @@ public class HudsonActiveObjectsUpgradeTask implements PluginUpgradeTask {
 			username = propertySet.getString(getServerUsernameKey(serverId));
 			password = propertySet.getString(getServerPasswordKey(serverId));
 		}
-		return serverManager.addServer(name, description, host, publicHost, username, password, true, isDefault);
+		return serverManager.addServer(name, description, host, publicHost, username, password, true, false, isDefault);
 	}
 
 	/**

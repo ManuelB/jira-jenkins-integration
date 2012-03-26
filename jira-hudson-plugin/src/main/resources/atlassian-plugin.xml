@@ -291,6 +291,9 @@
 	<component-import key="ao" name="Active Objects service" interface="com.atlassian.activeobjects.external.ActiveObjects">
 		<description>Component to access Active Objects functionality from the plugin</description>
 	</component-import>
+	<component-import key="plugin-scheduler" interface="com.atlassian.sal.api.scheduling.PluginScheduler">
+		<description>Component to access SAL Scheduler functionality from the plugin</description>
+	</component-import>
 
 	<!-- U P G R A D E   T A S K S -->
 	<component key="active-objects-upgrade" name="Active Objects Upgrade Task"

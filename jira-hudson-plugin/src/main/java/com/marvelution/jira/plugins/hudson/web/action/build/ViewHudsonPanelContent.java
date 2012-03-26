@@ -85,6 +85,7 @@ public class ViewHudsonPanelContent extends HudsonWebActionSupport {
 	private HudsonAssociation association;
 	private HudsonServer server;
 	private com.marvelution.hudson.plugins.apiv2.resources.model.Version hudsonVersion;
+	private int allBuildsOffset = -1;
 
 	/**
 	 * Constructor
@@ -186,7 +187,8 @@ public class ViewHudsonPanelContent extends HudsonWebActionSupport {
 		case BUILDS_BY_JOB:
 		default:
 			resultSet = new BuildsResultSet(server, client.findAll(BuildQuery.createForAllBuilds(
-					association.getJobName())));
+				association.getJobName()).setOffset(getAllBuildsOffset())
+				.setCount(configurationManager.getMaxBuildsPerRequest())));
 			break;
 		}
 	}
@@ -231,7 +233,8 @@ public class ViewHudsonPanelContent extends HudsonWebActionSupport {
 			} else if (startDate > 0L) {
 				query = BuildQuery.createForAfterFrom(association.getJobName(), startDate);
 			} else {
-				query = BuildQuery.createForAllBuilds(association.getJobName());
+				query = BuildQuery.createForAllBuilds(association.getJobName()).setOffset(getAllBuildsOffset())
+					.setCount(configurationManager.getMaxBuildsPerRequest());
 			}
 			resultSet = new BuildsResultSet(server, client.findAll(query));
 			break;
@@ -472,6 +475,26 @@ public class ViewHudsonPanelContent extends HudsonWebActionSupport {
 	 */
 	public void setHudsonVersion(com.marvelution.hudson.plugins.apiv2.resources.model.Version hudsonVersion) {
 		this.hudsonVersion = hudsonVersion;
+	}
+
+	/**
+	 * Getter for allBuildsOffset
+	 *
+	 * @return the allBuildsOffset
+	 * @since 4.5.0
+	 */
+	public int getAllBuildsOffset() {
+		return allBuildsOffset;
+	}
+
+	/**
+	 * Setter for allBuildsOffset
+	 *
+	 * @param allBuildsOffset the allBuildsOffset to set
+	 * @since 4.5.0
+	 */
+	public void setAllBuildsOffset(int allBuildsOffset) {
+		this.allBuildsOffset = allBuildsOffset;
 	}
 
 	/**

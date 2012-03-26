@@ -25,6 +25,7 @@ import java.util.Date;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -47,6 +48,8 @@ public class Builds extends ListableModel<Build> {
 
 	@XmlElementRef
 	private Collection<Build> items;
+	@XmlElement
+	private boolean hasMoreBuilds = false;
 
 	/**
 	 * Default Constructor
@@ -61,6 +64,26 @@ public class Builds extends ListableModel<Build> {
 	@Override
 	public Collection<Build> getItems() {
 		return items;
+	}
+
+	/**
+	 * Getter for hasMoreBuilds
+	 *
+	 * @return the hasMoreBuilds
+	 * @since 4.5.0
+	 */
+	public boolean isHasMoreBuilds() {
+		return hasMoreBuilds;
+	}
+
+	/**
+	 * Setter for hasMoreBuilds
+	 *
+	 * @param hasMoreBuilds the hasMoreBuilds to set
+	 * @since 4.5.0
+	 */
+	public void setHasMoreBuilds(boolean hasMoreBuilds) {
+		this.hasMoreBuilds = hasMoreBuilds;
 	}
 
 	/**

@@ -112,4 +112,20 @@ public interface HudsonConfigurationManager {
 	 */
 	void setShowIfIssueOfIssueType(Collection<String> showIfIssueOfIssueType);
 
+	/**
+	 * Getter for maxBuildsPerRequest
+	 *
+	 * @return the maxBuildsPerRequest
+	 * @since 4.5.0
+	 */
+	int getMaxBuildsPerRequest();
+
+	/**
+	 * Setter for maxBuildsPerRequest
+	 *
+	 * @param maxBuildsPerRequest the maxBuildsPerRequest to set
+	 * @since 4.5.0
+	 */
+	void setMaxBuildsPerRequest(int maxBuildsPerRequest);
+
 }

@@ -215,4 +215,26 @@ public class ConfigurePlugin extends AbstractHudsonAdminWebActionSupport {
 		configurationManager.setShowIfUserMemberOfProjectRole(Arrays.asList(showIfUserMemberOfProjectRole));
 	}
 
+	/**
+	 * Getter for the maxBuildsPerRequest
+	 * 
+	 * @return the maxBuildsPerRequest
+	 * @see com.marvelution.jira.plugins.hudson.services.configuration.HudsonConfigurationManager#getMaxBuildsPerRequest()
+	 * @since 4.5.0
+	 */
+	public int getMaxBuildsPerRequest() {
+		return configurationManager.getMaxBuildsPerRequest();
+	}
+
+	/**
+	 * Setter for the maxBuildsPerRequest
+	 * 
+	 * @param maxBuildsPerRequest the maxBuildsPerRequest to set
+	 * @see com.marvelution.jira.plugins.hudson.services.configuration.HudsonConfigurationManager#setMaxBuildsPerRequest(int)
+	 * @since 4.5.0
+	 */
+	public void setMaxBuildsPerRequest(int maxBuildsPerRequest) {
+		configurationManager.setMaxBuildsPerRequest(maxBuildsPerRequest);
+	}
+
 }

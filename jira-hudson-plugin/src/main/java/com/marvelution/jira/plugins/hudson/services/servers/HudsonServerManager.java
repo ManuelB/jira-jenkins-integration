@@ -159,11 +159,13 @@ public interface HudsonServerManager {
 	 * @param publicHost the public base host of the {@link HudsonServer}
 	 * @param username the username to use for authentication
 	 * @param password the password to use for authentication
+	 * @param includeInStreams flag whether the server can be included in the activity streams gadget
+	 * @param cacheBuilds flag whether builds are cached
 	 * @param isDefault the default status flag
 	 * @return the new {@link HudsonServer}
 	 */
 	HudsonServer addServer(String name, String description, String host, String publicHost, String username,
-					String password, boolean includeInStreams, boolean isDefault);
+					String password, boolean includeInStreams, boolean cacheBuilds, boolean isDefault);
 
 	/**
 	 * Add a copy of the given {@link HudsonServer}
@@ -184,11 +186,13 @@ public interface HudsonServerManager {
 	 * @param username the username to use for authentication
 	 * @param password the password to use for authentication
 	 * @param includeInStreams flag whether the server can be included in the activity streams gadget
+	 * @param cacheBuilds flag whether builds are cached
 	 * @param isDefault the default status flag
 	 * @return the new {@link HudsonServer}
 	 */
 	HudsonServer updateServer(int serverId, String name, String description, String host, String publicHost,
-					String username, String password, boolean includeInStreams, boolean isDefault);
+					String username, String password, boolean includeInStreams, boolean cacheBuilds,
+					boolean isDefault);
 
 	/**
 	 * Update a {@link HudsonServer}

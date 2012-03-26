@@ -53,6 +53,7 @@ public abstract class AbstractModifyServer extends AbstractHudsonAdminWebActionS
 	private String username;
 	private String password;
 	private boolean includeInStreams;
+	private boolean cacheBuilds;
 
 	protected final HudsonClientFactory clientFactory;
 
@@ -101,7 +102,7 @@ public abstract class AbstractModifyServer extends AbstractHudsonAdminWebActionS
 		if (hasAnyErrors()) {
 			return INPUT;
 		}
-		saveServer(name, description, host, publicHost, username, password, includeInStreams);
+		saveServer(name, description, host, publicHost, username, password, includeInStreams, cacheBuilds);
 		return getRedirect(ADMINISTER_SERVERS);
 	}
 
@@ -115,9 +116,10 @@ public abstract class AbstractModifyServer extends AbstractHudsonAdminWebActionS
 	 * @param username
 	 * @param password
 	 * @param includeInStreams
+	 * @param cacheBuilds
 	 */
 	protected abstract void saveServer(String name, String description, String host, String publicHost,
-					String username, String password, boolean includeInStreams);
+					String username, String password, boolean includeInStreams, boolean cacheBuilds);
 
 	/**
 	 * Getter for the action type eg: Add/Update
@@ -274,6 +276,26 @@ public abstract class AbstractModifyServer extends AbstractHudsonAdminWebActionS
 	 */
 	public void setIncludeInStreams(boolean includeInStreams) {
 		this.includeInStreams = includeInStreams;
+	}
+
+	/**
+	 * Getter for cacheBuilds
+	 *
+	 * @return the cacheBuilds
+	 * @since 4.5.0
+	 */
+	public boolean isCacheBuilds() {
+		return cacheBuilds;
+	}
+
+	/**
+	 * Setter for cacheBuilds
+	 *
+	 * @param cacheBuilds the cacheBuilds to set
+	 * @since 4.5.0
+	 */
+	public void setCacheBuilds(boolean cacheBuilds) {
+		this.cacheBuilds = cacheBuilds;
 	}
 
 }

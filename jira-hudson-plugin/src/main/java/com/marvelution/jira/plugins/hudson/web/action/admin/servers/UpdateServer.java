@@ -84,9 +84,9 @@ public class UpdateServer extends AbstractModifyServer {
 	 */
 	@Override
 	protected void saveServer(String name, String description, String host, String publicHost,
-					String username, String password, boolean includeInStreams) {
+					String username, String password, boolean includeInStreams, boolean cacheBuilds) {
 		serverManager.updateServer(getSid(), name, description, host, publicHost, username, password,
-			includeInStreams, isDefaultServer());
+			includeInStreams, cacheBuilds, isDefaultServer());
 	}
 
 	/**
@@ -97,6 +97,19 @@ public class UpdateServer extends AbstractModifyServer {
 	public String doSetAsDefault() {
 		if (serverManager.hasServer(getSid())) {
 			serverManager.setDefaultServer(getSid());
+		}
+		return getRedirect(ADMINISTER_SERVERS);
+	}
+
+	/**
+	 * Action support web method to set a {@link HudsonServer} as default server
+	 * 
+	 * @return the return URL {@link String}
+	 */
+	public String doClearCachelt() {
+		if (serverManager.hasServer(getSid())) {
+			HudsonServer server = serverManager.getServer(getSid());
+			// TODO Clear the Cache for the server
 		}
 		return getRedirect(ADMINISTER_SERVERS);
 	}
@@ -226,6 +239,14 @@ public class UpdateServer extends AbstractModifyServer {
 	@Override
 	public boolean isIncludeInStreams() {
 		return server.isIncludeInStreams();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isCacheBuilds() {
+		return server.isCacheBuilds();
 	}
 
 }
