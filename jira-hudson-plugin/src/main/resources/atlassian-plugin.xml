@@ -22,6 +22,7 @@
 		<description>${project.description}</description>
 		<vendor name="${project.organization.name}" url="${project.organization.url}" />
 		<version>${project.version}</version>
+		<param name="configure.url">/secure/admin/hudson/ConfigurePlugin.jspa</param>
 		<param name="plugin-icon">marketplace/icon_16.png</param>
 		<param name="plugin-logo">marketplace/icon_48.png</param>
 		<param name="vendor-icon">marketplace/icon_16.png</param>
