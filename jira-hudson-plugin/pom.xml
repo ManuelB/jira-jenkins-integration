@@ -41,7 +41,7 @@
 	<properties>
 		<atlassian.amps.version>3.8</atlassian.amps.version>
 		<atlassian.streams.version>4.1.2</atlassian.streams.version>
-		<atlassian.ao.version>0.15.8</atlassian.ao.version>
+		<atlassian.ao.version>0.17.2.1</atlassian.ao.version>
 		<atlassian.plugin.key>${project.groupId}.hudson</atlassian.plugin.key>
 	</properties>
 

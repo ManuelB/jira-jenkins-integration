@@ -53,7 +53,12 @@ public class HudsonServerEntity {
 	 * @see com.marvelution.jira.plugins.hudson.services.servers.HudsonServer#getPassword()
 	 */
 	public String getPassword() {
-		return ENCRYPTOR.decrypt(server.getPassword());
+		try {
+			return ENCRYPTOR.decrypt(server.getPassword());
+		} catch (Exception e) {
+			// Looks like the password is not yet encrypted, so just return the original string
+			return server.getPassword();
+		}
 	}
 
 	/**
