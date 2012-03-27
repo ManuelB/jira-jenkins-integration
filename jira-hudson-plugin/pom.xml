@@ -39,7 +39,7 @@
 	</scm>
 
 	<properties>
-		<atlassian.amps.version>3.8</atlassian.amps.version>
+		<atlassian.amps.version>3.9.1</atlassian.amps.version>
 		<atlassian.streams.version>4.1.2</atlassian.streams.version>
 		<atlassian.ao.version>0.17.2.1</atlassian.ao.version>
 		<atlassian.plugin.key>${project.groupId}.hudson</atlassian.plugin.key>
@@ -289,13 +289,6 @@
 					</pluginArtifacts>
 					<!-- TODO Add the instructions element -->
 				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>com.atlassian.maven.plugins</groupId>
-						<artifactId>maven-amps-plugin</artifactId>
-						<version>3.8-marvelution-1</version>
-					</dependency>
-				</dependencies>
 			</plugin>
 			<plugin>
 				<inherited>true</inherited>
