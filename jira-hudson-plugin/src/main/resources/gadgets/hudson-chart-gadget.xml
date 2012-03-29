@@ -22,8 +22,8 @@
 		description="__MSG_hudson.gadget.chart.description__"
 		author="Marvelution" author_email="info@marvelution.com" author_affiliation="Marvelution"
 		author_location="Beverwijk, The Netherlands" title_url="http://docs.marvelution.com/x/FgB1" height="100"
-		screenshot='#staticResourceUrl("${atlassian.plugin.key}:hudson-chart-gadget", "chart-screenshot.png")'
-		thumbnail='#staticResourceUrl("${atlassian.plugin.key}:hudson-chart-gadget", "chart-thumb.png")'>
+		screenshot='#staticResourceUrl("com.marvelution.jira.plugins.hudson:hudson-chart-gadget", "chart-screenshot.png")'
+		thumbnail='#staticResourceUrl("com.marvelution.jira.plugins.hudson:hudson-chart-gadget", "chart-thumb.png")'>
 		<Optional feature="gadget-directory">
 			<Param name="categories">
 				JIRA
@@ -44,7 +44,7 @@
 	<UserPref name="isConfigured" datatype="hidden" default_value="false" />
 	<UserPref name="titleRequired" datatype="hidden" default_value="true" />
 	<Content type="html"><![CDATA[
-		#requireResource("${atlassian.plugin.key}:hudson-gadget")
+		#requireResource("com.marvelution.jira.plugins.hudson:hudson-gadget")
 		#includeResources()
 		<script type="text/javascript">
 		gadgets.window.setTitle("__MSG_hudson.gadget.chart.title__");
