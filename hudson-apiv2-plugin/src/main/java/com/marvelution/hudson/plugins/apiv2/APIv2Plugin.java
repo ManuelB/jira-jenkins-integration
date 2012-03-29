@@ -88,12 +88,12 @@ public class APIv2Plugin extends Plugin {
 	public void start() throws Exception {
 		plugin = this;
 		load();
-		LOGGER.log(Level.FINE, "Adding the APIv2 Filters");
+		LOGGER.info("Adding the APIv2 Filters");
 		filters.add(new HudsonAPIV2ServletFilter());
 		for (Filter filter : filters) {
 			PluginServletFilter.addFilter(filter);
 		}
-		LOGGER.log(Level.FINE, "Loading the Activity Cache");
+		LOGGER.info("Loading the Activity Cache");
 		File activityCacheFile = getFile(ACTIVITIES_CACHE_FILE);
 		if (activityCacheFile.exists()) {
 			try {
@@ -103,7 +103,7 @@ public class APIv2Plugin extends Plugin {
 					.severe("Failed to load the activity-cache.xml and will thus not be available for the REST APIs");
 			}
 		}
-		LOGGER.log(Level.FINE, "Loading the Issues Cache");
+		LOGGER.info("Loading the Issues Cache");
 		File issuesCacheFile = getFile(ISSUES_CACHE_FILE);
 		if (issuesCacheFile.exists()) {
 			try {
@@ -122,14 +122,14 @@ public class APIv2Plugin extends Plugin {
 	 * {@inheritDoc}
 	 */
 	public void stop() throws Exception {
-		LOGGER.log(Level.FINE, "Removing the APIv2 Filters");
+		LOGGER.info("Removing the APIv2 Filters");
 		for (Filter filter : filters) {
 			PluginServletFilter.removeFilter(filter);
 		}
 		filters.clear();
-		LOGGER.log(Level.FINE, "Storing the Activity Cache");
+		LOGGER.info("Storing the Activity Cache");
 		XSTREAM.toXML(activitiesCache, new FileOutputStream(getFile(ACTIVITIES_CACHE_FILE)));
-		LOGGER.log(Level.FINE, "Storing the Issue Cache");
+		LOGGER.info("Storing the Issue Cache");
 		XSTREAM.toXML(issuesCache, new FileOutputStream(getFile(ISSUES_CACHE_FILE)));
 		save();
 		plugin = null;

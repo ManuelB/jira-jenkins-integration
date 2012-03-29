@@ -37,8 +37,8 @@ import org.apache.wink.common.annotations.Scope;
 import org.apache.wink.common.annotations.Scope.ScopeType;
 
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.Collections2;
+import com.google.common.collect.Lists;
 import com.marvelution.hudson.plugins.apiv2.APIv2Plugin;
 import com.marvelution.hudson.plugins.apiv2.cache.activity.ActivityCache;
 import com.marvelution.hudson.plugins.apiv2.cache.activity.ActivityCachePredicates;
@@ -106,18 +106,22 @@ public class ActivityRestResourceImpl extends BaseRestResource implements Activi
 	 * @return the {@link List} of {@link ActivityCache}s
 	 * @since 4.5.0
 	 */
+	@SuppressWarnings("unchecked")
 	private Collection<ActivityCache> getFilteredActivities(ActivityType[] types, String[] jobs, String[] userIds) {
 		if (ArrayUtils.isEmpty(types)) {
 			types = ActivityType.values();
 		}
-		Predicate<ActivityCache> predicates = ActivityCachePredicates.isActivity(types);
-		if (jobs != null) {
-			predicates = Predicates.and(predicates, ActivityCachePredicates.relatesToJobs(jobs));
+		List<Predicate<ActivityCache>> predicates = Lists.newArrayList(ActivityCachePredicates.isActivity(types));
+		if (jobs != null && jobs.length > 0) {
+			predicates.add(ActivityCachePredicates.relatesToJobs(jobs));
 		}
-		if (userIds != null) {
-			predicates = Predicates.and(predicates, ActivityCachePredicates.relatesToUsers(userIds));
+		if (userIds != null && userIds.length > 0) {
+			predicates.add(ActivityCachePredicates.relatesToUsers(userIds));
 		}
-		return Collections2.filter(APIv2Plugin.getActivitiesCache().getSortedActivities(), predicates);
+		Predicate<ActivityCache> predicate = ActivityCachePredicates.getSimpelistAndPredicate(predicates);
+		LOGGER.info("Filtering " + APIv2Plugin.getActivitiesCache().getSortedActivities().size()
+			+ " activities with Predicate: " + predicate.toString());
+		return Collections2.filter(APIv2Plugin.getActivitiesCache().getSortedActivities(), predicate);
 	}
 
 	/**

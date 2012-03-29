@@ -43,7 +43,7 @@ public class ActivityCachePredicates {
 				predicates.add(relatesToJob(jobname));
 			}
 		}
-		return Predicates.or(predicates);
+		return getSimpelistOrPredicate(predicates);
 	}
 
 	public static Predicate<ActivityCache> relatesToJob(final String jobname) {
@@ -56,6 +56,13 @@ public class ActivityCachePredicates {
 			public boolean apply(ActivityCache input) {
 				return input != null && input.getJob().equals(jobname);
 			}
+			/**
+			 * {@inheritDoc}
+			 */
+			@Override
+			public String toString() {
+				return "RelatesToJob(" + jobname + ")";
+			}
 		};
 	}
 
@@ -66,7 +73,7 @@ public class ActivityCachePredicates {
 				predicates.add(relatesToUser(username));
 			}
 		}
-		return Predicates.or(predicates);
+		return getSimpelistOrPredicate(predicates);
 	}
 
 	public static Predicate<ActivityCache> relatesToUser(final String username) {
@@ -79,6 +86,13 @@ public class ActivityCachePredicates {
 			public boolean apply(ActivityCache input) {
 				return input != null && input.getCulprit().equals(username);
 			}
+			/**
+			 * {@inheritDoc}
+			 */
+			@Override
+			public String toString() {
+				return "RelatesToUser(" + username + ")";
+			}
 		};
 	}
 
@@ -89,7 +103,7 @@ public class ActivityCachePredicates {
 				predicates.add(isActivity(type));
 			}
 		}
-		return Predicates.or(predicates);
+		return getSimpelistOrPredicate(predicates);
 	}
 
 	public static Predicate<ActivityCache> isActivity(final ActivityType type) {
@@ -112,6 +126,13 @@ public class ActivityCachePredicates {
 			public boolean apply(ActivityCache input) {
 				return input instanceof BuildActivityCache;
 			}
+			/**
+			 * {@inheritDoc}
+			 */
+			@Override
+			public String toString() {
+				return "IsABuildActivity()";
+			}
 		};
 	}
 
@@ -124,7 +145,34 @@ public class ActivityCachePredicates {
 			public boolean apply(ActivityCache input) {
 				return input instanceof JobActivityCache && !(input instanceof BuildActivityCache);
 			}
+			/**
+			 * {@inheritDoc}
+			 */
+			@Override
+			public String toString() {
+				return "IsAJobActivity()";
+			}
 		};
+	}
+
+	public static Predicate<ActivityCache> getSimpelistOrPredicate(List<Predicate<ActivityCache>> predicates) {
+		if (predicates == null || predicates.size() == 0) {
+			return Predicates.alwaysTrue();
+		} else if (predicates.size() == 1) {
+			return predicates.get(0);
+		} else {
+			return Predicates.or(predicates);
+		}
+	}
+
+	public static Predicate<ActivityCache> getSimpelistAndPredicate(List<Predicate<ActivityCache>> predicates) {
+		if (predicates == null || predicates.size() == 0) {
+			return Predicates.alwaysTrue();
+		} else if (predicates.size() == 1) {
+			return predicates.get(0);
+		} else {
+			return Predicates.and(predicates);
+		}
 	}
 
 }
