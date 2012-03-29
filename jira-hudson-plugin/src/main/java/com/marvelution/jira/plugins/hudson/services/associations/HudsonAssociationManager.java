@@ -21,7 +21,6 @@ package com.marvelution.jira.plugins.hudson.services.associations;
 
 import java.util.Collection;
 
-import com.atlassian.activeobjects.tx.Transactional;
 import com.atlassian.jira.project.Project;
 import com.marvelution.jira.plugins.hudson.services.servers.HudsonServer;
 
@@ -30,7 +29,6 @@ import com.marvelution.jira.plugins.hudson.services.servers.HudsonServer;
  * 
  * @author <a href="mailto:markrekveld@marvelution.com">Mark Rekveld</a>
  */
-@Transactional
 public interface HudsonAssociationManager {
 
 	/**

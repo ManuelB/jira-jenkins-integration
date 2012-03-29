@@ -30,6 +30,7 @@ import net.java.ao.Query;
 import org.apache.log4j.Logger;
 
 import com.atlassian.activeobjects.external.ActiveObjects;
+import com.atlassian.activeobjects.tx.Transactional;
 import com.atlassian.jira.bc.whitelist.WhitelistManager;
 import com.google.common.collect.Lists;
 
@@ -38,6 +39,7 @@ import com.google.common.collect.Lists;
  * 
  * @author <a href="mailto:markrekveld@marvelution.com">Mark Rekveld</a>
  */
+@Transactional
 public class HudsonServerManagerService implements HudsonServerManager {
 
 	private static final Logger LOGGER = Logger.getLogger(HudsonServerManagerService.class);

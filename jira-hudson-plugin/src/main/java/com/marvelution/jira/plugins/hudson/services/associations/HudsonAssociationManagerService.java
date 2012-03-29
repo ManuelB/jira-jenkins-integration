@@ -26,6 +26,7 @@ import java.util.Collection;
 import net.java.ao.Query;
 
 import com.atlassian.activeobjects.external.ActiveObjects;
+import com.atlassian.activeobjects.tx.Transactional;
 import com.atlassian.jira.project.Project;
 import com.google.common.collect.Lists;
 import com.marvelution.jira.plugins.hudson.services.servers.HudsonServer;
@@ -36,6 +37,7 @@ import com.marvelution.jira.plugins.hudson.services.servers.HudsonServerManager;
  * 
  * @author <a href="mailto:markrekveld@marvelution.com">Mark Rekveld</a>
  */
+@Transactional
 public class HudsonAssociationManagerService implements HudsonAssociationManager {
 
 	private final ActiveObjects objects;
