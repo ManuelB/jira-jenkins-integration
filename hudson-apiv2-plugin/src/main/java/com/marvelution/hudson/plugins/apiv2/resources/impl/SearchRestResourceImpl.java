@@ -82,7 +82,11 @@ public class SearchRestResourceImpl extends BaseRestResource implements SearchRe
 		for (Entry<String, Set<Integer>> entry : buildsMap.entrySet()) {
 			hudson.model.Job<?, ? extends AbstractBuild<?, ?>> job = getHudsonJob(entry.getKey());
 			for (Integer number : entry.getValue()) {
-				builds.add(DozerUtils.getMapper().map(job.getBuildByNumber(number), Build.class));
+				AbstractBuild<?, ?> build = job.getBuildByNumber(number);
+				// Check is needed if the Issue Cache is not fully up-to-date
+				if (build != null) {
+					builds.add(DozerUtils.getMapper().map(build, Build.class));
+				}
 			}
 		}
 		builds.sortBuilds();
