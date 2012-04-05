@@ -104,7 +104,7 @@ li {
 }
 
 .centerSummary {
-	width: 70%;
+	width: 80%;
 }
 
 .centerSummary, .centerSummary ul, .centerSummary ol {
@@ -138,7 +138,7 @@ li {
 }
 
 .summaryDetails .artifactList {
-	width: 50%;
+	width: 100%;
 }
 
 .summaryDetails .relatedIssues {
@@ -171,7 +171,7 @@ li {
 
 .summaryDetails .changeLog {
 	list-style-type: square;
-	width: 50%;
+	width: 100%;
 }
 
 .summaryDetails .changeLog li {

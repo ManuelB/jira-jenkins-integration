@@ -27,17 +27,6 @@
 				<a href="${server.publicHost}/${build.jobUrl}">${build.jobName}</a> > <a href="${server.publicHost}/${build.url}">${i18n.getText("hudson.panel.build.number", $build.buildNumber)}</a>
 			</li>
 			<li class="summaryDetails">
-				<ul class="relatedIssues">
-					<li class="label">${i18n.getText("hudson.panel.build.related.issues")}:</li>
-					#if ($build.relatedIssueKeys.isEmpty())
-					<li class="last">${i18n.getText("hudson.panel.build.no.related.issues")}</a>
-					#else
-					#foreach ($issueKey in $build.relatedIssueKeys)
-					<li #if (!$foreach.hasNext)class="last"#end><a href="${req.contextPath}/browse/$issueKey">$issueKey</a></li>
-					#end
-					#end
-				</ul>
-				<script type="text/javascript">AJS.hudson.panel.registerList("relatedIssues", "inline");</script>
 				<ul>
 					#foreach ($trigger in $build.triggers)
 					<li>${triggerFormatUtils.format($trigger)}</li>
@@ -61,7 +50,7 @@
 				<ul class="artifactList">
 					<li class="label">${i18n.getText("hudson.panel.build.artifacts")}:</li>
 					#foreach ($artifact in $build.buildArtifacts)
-					<li #if (!$foreach.hasNext)class="last"#end><a href="${server.publicHost}/${build.jobUrl}/lastBuild/${artifact.url}">$artifact.name</a></li>
+					<li #if (!$foreach.hasNext) class="last" #end><a href="${server.publicHost}/${build.jobUrl}/lastBuild/${artifact.url}">$artifact.name</a></li>
 					#end
 				</ul>
 				<script type="text/javascript">AJS.hudson.panel.registerList("artifactList", "inline");</script>
@@ -70,7 +59,7 @@
 				<ul class="changeLog">
 					<li class=label>${i18n.getText("hudson.panel.build.change.log")}:</li>
 					#foreach ($changeLog in $build.changeLog)
-					<li>$changeLog.message</li>
+					<li>$changelogAnnotator.annotate($changeLog.message)</li>
 					#end
 				</ul>
 				<script type="text/javascript">AJS.hudson.panel.registerList("changeLog", "list-item");</script>

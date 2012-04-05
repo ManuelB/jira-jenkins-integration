@@ -57,6 +57,7 @@ import com.marvelution.jira.plugins.hudson.services.servers.HudsonClientFactory;
 import com.marvelution.jira.plugins.hudson.services.servers.HudsonServer;
 import com.marvelution.jira.plugins.hudson.services.servers.HudsonServerManager;
 import com.marvelution.jira.plugins.hudson.utils.BuildUtils;
+import com.marvelution.jira.plugins.hudson.utils.ChangelogAnnotator;
 import com.marvelution.jira.plugins.hudson.utils.DateFormatUtils;
 import com.marvelution.jira.plugins.hudson.utils.JobUtils;
 import com.marvelution.jira.plugins.hudson.utils.RequestAndSessionUtils;
@@ -76,6 +77,7 @@ public class ViewHudsonPanelContent extends HudsonWebActionSupport {
 	private final HudsonAssociationManager associationManager;
 	private final HudsonClientFactory clientFactory;
 	private final HudsonConfigurationManager configurationManager;
+	private final ChangelogAnnotator changelogAnnotator;
 
 	private ResultSet<?> resultSet;
 	private PanelView view;
@@ -94,13 +96,16 @@ public class ViewHudsonPanelContent extends HudsonWebActionSupport {
 	 * @param associationManager the {@link HudsonAssociationManager} implementation
 	 * @param clientFactory the {@link HudsonClientFactory} implementation
 	 * @param configurationManager the {@link HudsonConfigurationManager} implementation
+	 * @param changelogAnnotator the {@link ChangelogAnnotator}
 	 */
 	public ViewHudsonPanelContent(HudsonServerManager serverManager, HudsonAssociationManager associationManager,
-			HudsonClientFactory clientFactory, HudsonConfigurationManager configurationManager) {
+				HudsonClientFactory clientFactory, HudsonConfigurationManager configurationManager,
+				ChangelogAnnotator changelogAnnotator) {
 		this.serverManager = serverManager;
 		this.associationManager = associationManager;
 		this.clientFactory = clientFactory;
 		this.configurationManager = configurationManager;
+		this.changelogAnnotator = changelogAnnotator;
 	}
 
 	/**
@@ -531,6 +536,15 @@ public class ViewHudsonPanelContent extends HudsonWebActionSupport {
 	 */
 	public TriggerFormatUtils getTriggerFormatUtils() {
 		return new TriggerFormatUtils(getAuthenticationContext(), request.getContextPath(), server);
+	}
+
+	/**
+	 * Getter for the {@link ChangelogAnnotator}
+	 * 
+	 * @return the {@link ChangelogAnnotator}
+	 */
+	public ChangelogAnnotator getChangelogAnnotator() {
+		return changelogAnnotator;
 	}
 
 }

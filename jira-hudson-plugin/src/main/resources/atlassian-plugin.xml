@@ -281,6 +281,8 @@
 			class="com.marvelution.jira.plugins.hudson.services.configuration.HudsonConfigurationManagerService">
 		<interface>com.marvelution.jira.plugins.hudson.services.configuration.HudsonConfigurationManager</interface>
 	</component>
+	<component key="changelog-annotator" name="Hudson Changelog Annotator" 
+			class="com.marvelution.jira.plugins.hudson.utils.ChangelogAnnotator" />
 
 	<!-- I M P O R T E D   C O M P O N E N T S -->
 	<component-import key="i18nResolver" interface="com.atlassian.sal.api.message.I18nResolver">
@@ -294,6 +296,9 @@
 	</component-import>
 	<component-import key="plugin-scheduler" interface="com.atlassian.sal.api.scheduling.PluginScheduler">
 		<description>Component to access SAL Scheduler functionality from the plugin</description>
+	</component-import>
+	<component-import key="application-properties" interface="com.atlassian.jira.config.properties.ApplicationProperties">
+		<description>Component to access Application Properties from the plugin</description>
 	</component-import>
 
 	<!-- U P G R A D E   T A S K S -->
