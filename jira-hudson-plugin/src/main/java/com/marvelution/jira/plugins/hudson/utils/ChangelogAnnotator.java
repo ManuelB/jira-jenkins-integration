@@ -23,7 +23,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 
 import com.atlassian.jira.ComponentManager;
 import com.atlassian.jira.bc.admin.ApplicationPropertiesService;
@@ -40,8 +39,6 @@ import com.google.common.base.Preconditions;
  * @since 4.5.0
  */
 public class ChangelogAnnotator {
-
-	private static final Logger LOGGER = Logger.getLogger(ChangelogAnnotator.class);
 
 	private final ApplicationPropertiesService applicationPropertiesService;
 	private final IssueManager issueManager;
@@ -85,11 +82,9 @@ public class ChangelogAnnotator {
 	public String annotate(String jiraBaseUrl, String changelog) {
 		Pattern pattern =
 			Pattern.compile("\\b((" + getProperty(APKeys.JIRA_PROJECTKEY_PATTERN) + ")-([1-9][0-9]*))\\b");
-		LOGGER.debug("Searching for: " + pattern.pattern());
 		Matcher matcher = pattern.matcher(changelog);
 		while (matcher.find()) {
 			String issueKey = matcher.group();
-			LOGGER.error("Found issue key: " + issueKey);
 			if (issueManager.getIssueObject(issueKey) != null) {
 				changelog =
 					StringUtils.replace(changelog, issueKey,
