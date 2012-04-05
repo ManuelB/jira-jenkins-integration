@@ -1,0 +1,32 @@
+<!--
+ ~ Licensed to Marvelution under one or more contributor license 
+ ~ agreements.	See the NOTICE file distributed with this work 
+ ~ for additional information regarding copyright ownership.
+ ~ Marvelution licenses this file to you under the Apache License,
+ ~ Version 2.0 (the "License"); you may not use this file except
+ ~ in compliance with the License.
+ ~ You may obtain a copy of the License at
+ ~
+ ~	http://www.apache.org/licenses/LICENSE-2.0
+ ~
+ ~ Unless required by applicable law or agreed to in writing,
+ ~ software distributed under the License is distributed on an
+ ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ ~ KIND, either express or implied. See the License for the
+ ~ specific language governing permissions and limitations
+ ~ under the License.
+ -->
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:s="/lib/form">
+	<l:header />
+	<l:side-panel>
+		<l:tasks>
+			<l:task icon="images/24x24/up.png" href="${rootURL}/" title="${%Back to Dashboard}" />
+			<l:task icon="images/24x24/setting.png" href="${rootURL}/manage" title="${%Manage} ${it.getSystem().getHumanName()}" permission="${app.ADMINISTER}" />
+			<l:task icon="images/24x24/refresh.png" href="${rootURL}/manageAPIv2/issueIndex" title="${%Index Issues Now}" permission="${app.ADMINISTER}" />
+			<l:task icon="images/24x24/folder-delete.png" href="${rootURL}/manageAPIv2/clearIssueCache" title="${%Clear Issues Cache}" permission="${app.ADMINISTER}" />
+			<l:task icon="images/24x24/refresh.png" href="${rootURL}/manageAPIv2/activityIndex" title="${%Index Activity Now}" permission="${app.ADMINISTER}" />
+			<l:task icon="images/24x24/folder-delete.png" href="${rootURL}/manageAPIv2/clearActivityCache" title="${%Clear Activity Cache}" permission="${app.ADMINISTER}" />
+		</l:tasks>
+	</l:side-panel>
+</j:jelly>

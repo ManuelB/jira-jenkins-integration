@@ -19,6 +19,8 @@
 
 package com.marvelution.hudson.plugins.apiv2.cache.activity;
 
+import java.util.Date;
+
 import org.apache.commons.lang.builder.HashCodeBuilder;
 
 /**
@@ -52,6 +54,14 @@ public class JobActivityCache implements ActivityCache {
 	@Override
 	public long getTimestamp() {
 		return timestamp;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Date getDatetime() {
+		return new Date(getTimestamp());
 	}
 
 	/**

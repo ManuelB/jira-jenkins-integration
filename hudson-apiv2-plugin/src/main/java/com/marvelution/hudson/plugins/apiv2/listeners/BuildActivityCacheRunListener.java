@@ -25,10 +25,7 @@ import java.util.logging.Logger;
 import com.marvelution.hudson.plugins.apiv2.APIv2Plugin;
 import com.marvelution.hudson.plugins.apiv2.cache.activity.ActivityCache;
 import com.marvelution.hudson.plugins.apiv2.cache.activity.BuildActivityCache;
-import com.marvelution.hudson.plugins.apiv2.dozer.utils.DozerUtils;
-import com.marvelution.hudson.plugins.apiv2.resources.model.build.triggers.Trigger;
-import com.marvelution.hudson.plugins.apiv2.resources.model.build.triggers.UserTrigger;
-import com.marvelution.hudson.plugins.apiv2.utils.HudsonPluginUtils;
+import com.marvelution.hudson.plugins.apiv2.utils.BuildUtils;
 
 import hudson.Extension;
 import hudson.model.Hudson;
@@ -79,19 +76,7 @@ public class BuildActivityCacheRunListener extends RunListener<Run> {
 		if (!(r.getParent().getParent() instanceof Hudson)) {
 			activity.setParent(r.getParent().getParent().getFullName());
 		}
-		String culprit = HudsonPluginUtils.getHudsonSystem().getSystemUser().getUserId();
-		if (r.getCauses() != null) {
-			for (Object cause : r.getCauses()) {
-				Trigger trigger = DozerUtils.getMapper().map(cause, Trigger.class);
-				if (trigger != null) {
-					if (trigger instanceof UserTrigger) {
-						culprit = ((UserTrigger) trigger).getUsername();
-						break;
-					}
-				}
-			}
-		}
-		activity.setCulprit(culprit);
+		activity.setCulprit(BuildUtils.getCulpritFromRunnable(r));
 		return activity;
 	}
 

@@ -1,0 +1,56 @@
+<!--
+ ~ Licensed to Marvelution under one or more contributor license 
+ ~ agreements.	See the NOTICE file distributed with this work 
+ ~ for additional information regarding copyright ownership.
+ ~ Marvelution licenses this file to you under the Apache License,
+ ~ Version 2.0 (the "License"); you may not use this file except
+ ~ in compliance with the License.
+ ~ You may obtain a copy of the License at
+ ~
+ ~	http://www.apache.org/licenses/LICENSE-2.0
+ ~
+ ~ Unless required by applicable law or agreed to in writing,
+ ~ software distributed under the License is distributed on an
+ ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ ~ KIND, either express or implied. See the License for the
+ ~ specific language governing permissions and limitations
+ ~ under the License.
+ -->
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+	<l:layout permission="${app.ADMINISTER}" title="${%Manage APIv2 Caches}" norefresh="true">
+		<st:include page="sidepanel.jelly" />
+		<l:main-panel>
+			<h1>${%Manage APIv2 Caches}</h1>
+			<p>${%issuesCacheActions}</p>
+			<local:tabBar page="issues" xmlns:local="/com/marvelution/hudson/plugins/apiv2/management/ManageAPIv2" />
+			<table id="issues" class="sortable pane bigtable">
+				<j:choose>
+					<j:when test="${empty(it.issuesCache)}">
+						<tr>
+							<td>${%No Issues}</td>
+						</tr>
+					</j:when>
+					<j:otherwise>
+						<tr style="border-top: 0px;">
+							<th width="50%" initialSortDir="down">${%Build}</th>
+							<th width="50%">${%Issues}</th>
+						</tr>
+						<j:forEach var="issue" items="${it.issuesCache}">
+							<tr>
+								<td class="pane" style="vertical-align: top;">
+									<a href="${rootURL}/job/${issue.key.job}/${issue.key.build}">${issue.key.job} #${issue.key.build}</a>
+								</td>
+								<td class="pane">
+									<j:forEach var="key" items="${issue.value}">
+									${key}<br />
+									</j:forEach>
+								</td>
+							</tr>
+						</j:forEach>
+					</j:otherwise>
+				</j:choose>
+			</table>
+		</l:main-panel>
+	</l:layout>
+</j:jelly>

@@ -52,8 +52,8 @@ public class JiraIssueKeyCacheRunListener extends RunListener<Run> {
 	 */
 	@Override
 	public void onCompleted(Run r, TaskListener listener) {
-		Collection<IssueCache> toBeAdded = Lists.newArrayList();
 		if (r instanceof AbstractBuild) {
+			Collection<IssueCache> toBeAdded = Lists.newArrayList();
 			// We can only handle AbstractBuild implementations since we need the change log
 			AbstractBuild<?, ?> build = (AbstractBuild<?, ?>) r;
 			for (Entry entry : (ChangeLogSet<? extends Entry>) build.getChangeSet()) {
@@ -67,8 +67,8 @@ public class JiraIssueKeyCacheRunListener extends RunListener<Run> {
 					}
 				}
 			}
+			APIv2Plugin.getIssuesCache().addAll(toBeAdded);
 		}
-		APIv2Plugin.getIssuesCache().addAll(toBeAdded);
 	}
 
 	/**

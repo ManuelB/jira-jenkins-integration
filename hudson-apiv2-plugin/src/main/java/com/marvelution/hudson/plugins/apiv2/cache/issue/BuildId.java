@@ -24,47 +24,24 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 /**
  * @author <a href="mailto:markrekveld@marvelution.com">Mark Rekveld</a>
  *
- * @since 4.4.0
+ * @since 4.5.0
  */
-public class IssueCache {
+public class BuildId {
 
-	private IssueKey issueKey;
-	private String job;
-	private int build;
-
-	/**
-	 * Constructor
-	 *
-	 * @param issueKey
-	 * @param job
-	 * @param build
-	 */
-	public IssueCache(String issueKey, String job, int build) {
-		this(IssueKey.getIssueKey(issueKey), job, build);
-	}
+	private final String job;
+	private final int build;
 
 	/**
 	 * Constructor
 	 *
-	 * @param issueKey
 	 * @param job
 	 * @param build
 	 */
-	public IssueCache(IssueKey issueKey, String job, int build) {
-		this.issueKey = issueKey;
+	public BuildId(String job, int build) {
 		this.job = job;
 		this.build = build;
 	}
 
-	/**
-	 * Getter for issueKey
-	 *
-	 * @return the issueKey
-	 */
-	public IssueKey getIssueKey() {
-		return issueKey;
-	}
-	
 	/**
 	 * Getter for job
 	 *
@@ -73,7 +50,7 @@ public class IssueCache {
 	public String getJob() {
 		return job;
 	}
-	
+
 	/**
 	 * Getter for build
 	 *
@@ -84,12 +61,15 @@ public class IssueCache {
 	}
 
 	/**
-	 * Getter for the {@link BuildId}
-	 * 
-	 * @return the {@link BuildId}
+	 * {@inheritDoc}
 	 */
-	public BuildId getBuildId() {
-		return new BuildId(job, build);
+	@Override
+	public boolean equals(Object object) {
+		if (object instanceof BuildId) {
+			BuildId other = (BuildId) object;
+			return getJob().equals(other.getJob()) && getBuild() == other.getBuild();
+		}
+		return false;
 	}
 
 	/**
@@ -104,21 +84,8 @@ public class IssueCache {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean equals(Object paramObject) {
-		if (paramObject instanceof IssueCache) {
-			IssueCache other = (IssueCache) paramObject;
-			return getIssueKey().equals(other.getIssueKey()) && getJob().equals(other.getJob())
-				&& getBuild() == other.getBuild();
-		}
-		return false;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public String toString() {
-		return "IssueCache[key: " + issueKey.toString() + ", job: " + job + ", build: " + build + "]";
+		return getJob() + " #" + getBuild();
 	}
 
 }

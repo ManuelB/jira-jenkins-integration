@@ -19,6 +19,8 @@
 
 package com.marvelution.hudson.plugins.apiv2.cache.activity;
 
+import java.util.Date;
+
 /**
  * @author <a href="mailto:markrekveld@marvelution.com">Mark Rekveld</a>
  *
@@ -27,6 +29,8 @@ package com.marvelution.hudson.plugins.apiv2.cache.activity;
 public interface ActivityCache {
 
 	long getTimestamp();
+
+	Date getDatetime();
 
 	String getJob();
 
