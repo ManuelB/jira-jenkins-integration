@@ -45,6 +45,8 @@ public class Chart {
 	private int width;
 	@XmlElement
 	private int height;
+	@XmlElement
+	private String job;
 
 	/**
 	 * Default Constructor
@@ -60,24 +62,27 @@ public class Chart {
 	 * @param imageMap the image map
 	 * @param width the width in pixels
 	 * @param height the height in pixels
+	 * @param job the job that the chart was generated for
 	 */
-	public Chart(String location, String imageMapName, String imageMap, int width, int height) {
+	public Chart(String location, String imageMapName, String imageMap, int width, int height, String job) {
 		this.location = location;
 		this.imageMapName = imageMapName;
 		this.imageMap = imageMap;
 		this.width = width;
 		this.height = height;
+		this.job = job;
 	}
 
 	/**
 	 * Constructor
 	 * 
 	 * @param chartHelper the {@link ChartHelper} object to get all the data from
+	 * @param job the job name
 	 */
-	public Chart(ChartHelper chartHelper) {
+	public Chart(ChartHelper chartHelper, String job) {
 		this(chartHelper.getLocation(), chartHelper.getImageMapName(), chartHelper.getImageMap(),
 				Double.valueOf(chartHelper.getRenderingInfo().getChartArea().getWidth()).intValue(),
-				Double.valueOf(chartHelper.getRenderingInfo().getChartArea().getHeight()).intValue());
+				Double.valueOf(chartHelper.getRenderingInfo().getChartArea().getHeight()).intValue(), job);
 	}
 
 	/**
@@ -168,6 +173,26 @@ public class Chart {
 	 */
 	public void setHeight(int height) {
 		this.height = height;
+	}
+
+	/**
+	 * Getter for job
+	 *
+	 * @return the job
+	 * @since 4.5.0
+	 */
+	public String getJob() {
+		return job;
+	}
+
+	/**
+	 * Setter for job
+	 *
+	 * @param job the job to set
+	 * @since 4.5.0
+	 */
+	public void setJob(String job) {
+		this.job = job;
 	}
 
 }

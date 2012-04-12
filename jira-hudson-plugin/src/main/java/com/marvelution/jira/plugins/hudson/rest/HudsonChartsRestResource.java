@@ -157,7 +157,7 @@ public class HudsonChartsRestResource {
 					throw new NoSuchChartException(type);
 				}
 				chartHelper.generate(CHART_WIDTH, CHART_HEIGHT);
-				return new Chart(chartHelper);
+				return new Chart(chartHelper, job.getName());
 			} else {
 				throw new NoSuchJobException(jobname);
 			}

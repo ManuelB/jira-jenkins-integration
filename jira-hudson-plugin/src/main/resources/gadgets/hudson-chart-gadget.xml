@@ -89,7 +89,7 @@
 						gadget.getView().empty();
 						var headerDiv = AJS.hudson.utils.createDiv();
 						headerDiv.addClass('chartHeader');
-						headerDiv.html(gadget.getMsg("hudson.charts." + gadget.getPref("chart") + ".description"));
+						headerDiv.html(AJS.format(gadget.getMsg("hudson.charts." + gadget.getPref("chart") + ".description"), args.chart.job));
 						gadget.getView().append(headerDiv);
 						gadget.getView().append(AJS.hudson.utils.createChart(gadget, args.chart));
 						gadget.resize();
