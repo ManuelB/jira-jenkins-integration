@@ -72,8 +72,8 @@
 						var gadget = this;
 						gadget.getView().empty();
 						var hudsonServer = AJS.hudson.gadget.utils.parseServer(gadget.getBaseUrl(), gadget.getPref("server"));
-						for (var index in args.jobs) {
-							var job = args.jobs[index];
+						for (var index in args.view.Jobs) {
+							var job = args.view.Jobs[index];
 							var jobDiv = AJS.hudson.utils.createDiv();
 							jobDiv.addClass('job');
 							var resultsDiv = AJS.hudson.utils.createDiv();
@@ -111,7 +111,7 @@
 						gadget.resize();
 					},
 					args: [{
-						key: "jobs",
+						key: "view",
 						ajaxOptions: function () {
 							var gadget = this;
 							var hudsonServer = AJS.hudson.gadget.utils.parseServer(gadget.getBaseUrl(), gadget.getPref("server"));
