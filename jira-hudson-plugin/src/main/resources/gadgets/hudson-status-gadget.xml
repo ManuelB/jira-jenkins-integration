@@ -39,6 +39,7 @@
 		#supportedLocales("gadget.common,hudson.gadget")
 	</ModulePrefs>
 	<UserPref name="server" datatype="hidden" default_value="" />
+	<UserPref name="view" datatype="hidden" default_value="All" />
 	<UserPref name="dateFormat" datatype="hidden" default_value="m-d-Y H:i:s" />
 	<UserPref name="refresh" datatype="hidden" default_value="false" />
 	<UserPref name="isConfigured" datatype="hidden" default_value="false" />
@@ -114,7 +115,7 @@
 						ajaxOptions: function () {
 							var gadget = this;
 							var hudsonServer = AJS.hudson.gadget.utils.parseServer(gadget.getBaseUrl(), gadget.getPref("server"));
-							return AJS.hudson.gadget.utils.getAjaxOptions(hudsonServer, "/apiv2/jobs/all");
+							return AJS.hudson.gadget.utils.getAjaxOptions(hudsonServer, "/apiv2/views?name=" + gadget.getPref("view"));
 						}
 					}]
 				}

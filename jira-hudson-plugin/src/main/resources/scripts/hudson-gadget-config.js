@@ -42,6 +42,7 @@ AJS.hudson.gadget.config.getThemeConfiguration = function(gadgets) {
 AJS.hudson.gadget.config.getServerOnlyFields = function(gadget) {
 	return [
 	    AJS.hudson.gadget.config.serverField(gadget),
+	    AJS.hudson.gadget.config.viewField(gadget),
 	    AJS.hudson.gadget.config.dateFormatField(gadget),
 		AJS.hudson.gadget.config.isConfiguredField,
 		AJS.hudson.gadget.config.titleRequiredField
@@ -92,6 +93,23 @@ AJS.hudson.gadget.config.serverField = function(gadget) {
 		description: gadget.getMsg("hudson.gadget.server.description"),
 		type: "text",
 		value: gadget.getPref("server")
+	}
+}
+
+/**
+ * The Gadgets' View field
+ * 
+ * @param gadget the gadget to get the view field for
+ * @return the view field
+ */
+AJS.hudson.gadget.config.viewField = function(gadget) {
+	return {
+		id: "hudsonView",
+		userpref: "view",
+		label: gadget.getMsg("hudson.gadget.view.label"),
+		description: gadget.getMsg("hudson.gadget.view.description"),
+		type: "text",
+		value: gadget.getPref("view")
 	}
 }
 
