@@ -132,6 +132,7 @@ public class BuildTestResultsRatioChartGenerator extends AbstractHudsonChartGene
 		domainAxis.setUpperBound(Collections.max(buildMap.keySet()));
 		final TickUnitSource ticks = NumberAxis.createIntegerTickUnits();
 		domainAxis.setStandardTickUnits(ticks);
+		domainAxis.setVerticalTickLabels(true);
 		xyPlot.setDomainAxis(domainAxis);
 		ChartUtil.setupPlot(xyPlot);
 		return new ChartHelper(chart);

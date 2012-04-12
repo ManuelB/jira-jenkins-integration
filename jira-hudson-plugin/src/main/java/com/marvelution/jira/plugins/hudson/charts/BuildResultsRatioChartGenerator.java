@@ -101,6 +101,7 @@ public class BuildResultsRatioChartGenerator extends AbstractHudsonChartGenerato
 		domainAxis.setUpperBound(Collections.max(buildMap.keySet()));
 		final TickUnitSource ticks = NumberAxis.createIntegerTickUnits();
 		domainAxis.setStandardTickUnits(ticks);
+		domainAxis.setVerticalTickLabels(true);
 		xyPlot.setDomainAxis(domainAxis);
 		final DateAxis rangeAxis = new DateAxis();
 		final DurationFormat durationFormat = new DurationFormat();
