@@ -16,6 +16,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
+.empty-results {
+	padding: 0.5em;
+	text-align: left;
+}
+
 /** Status Gadget Styles **/
 .job {
 	font-family: arial,sans-serif;

@@ -228,3 +228,15 @@ AJS.hudson.utils.toggleTabView = function(gadget, tabId) {
 AJS.hudson.utils.setInnerHtml = function(elementId, html) {
 	AJS.$("#" + elementId).html(html);
 }
+
+/**
+ * Generate the Error messages box
+ * 
+ * @param error the error
+ * @return the error messages div
+ */
+AJS.hudson.utils.generateErrorMessageBox = function(error) {
+	var errorDiv = AJS.$("<div/>").addClass("empty-results").addClass("aui-message").addClass("error");
+	errorDiv.append(AJS.$("<span/>").addClass("aui-icon").addClass("icon-error")).append(error);
+	return errorDiv;
+}
