@@ -68,7 +68,7 @@ public class BrowseIssueContextImpl implements BrowseIssueContext {
 	 */
 	@Override
 	public Query createQuery() {
-		throw new UnsupportedOperationException("Query is not supported by teh BrowseIssueContext");
+		throw new UnsupportedOperationException("Query is not supported by the BrowseIssueContext");
 	}
 
 	/**
@@ -76,7 +76,7 @@ public class BrowseIssueContextImpl implements BrowseIssueContext {
 	 */
 	@Override
 	public String getQueryString() {
-		throw new UnsupportedOperationException("Query is not supported by teh BrowseIssueContext");
+		throw new UnsupportedOperationException("Query is not supported by the BrowseIssueContext");
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class BrowseIssueContextImpl implements BrowseIssueContext {
 	 */
 	@Override
 	public Map<String, Object> createParameterMap() {
-		throw new UnsupportedOperationException("Query is not supported by teh BrowseIssueContext");
+		throw new UnsupportedOperationException("Query is not supported by the BrowseIssueContext");
 	}
 
 	/**
@@ -92,7 +92,7 @@ public class BrowseIssueContextImpl implements BrowseIssueContext {
 	 */
 	@Override
 	public String getContextKey() {
-		throw new UnsupportedOperationException("Query is not supported by teh BrowseIssueContext");
+		throw new UnsupportedOperationException("Query is not supported by the BrowseIssueContext");
 	}
 
 	/**
