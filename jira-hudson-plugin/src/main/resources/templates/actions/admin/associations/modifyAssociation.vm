@@ -143,31 +143,42 @@ $!webResourceManager.requireResourcesForContext("hudson-admin")
 </table>
 </form>
 <script type="text/javascript">
-function updateJobList() {
-	jQuery('#jobName').attr("disabled", false);
-	jQuery('#jobName').css("display", "none");
-	jQuery('#waitImage').css("display", "block");
-	jQuery.ajax({
-		type: 'GET',
-		dataType: 'json',
-		url: '${req.contextPath}/rest/hudson/2.0/server/' + jQuery('#hudsonId').val() + '/listJobs',
-		success: function(data) {
-			var jobName = jQuery('#jobName');
-			jobName.empty();
-			if (data !== undefined) {
-				jQuery(data).each(function() {
-					jQuery('<option/>')
-						.attr({value: this.name})
-						.text(this.name)
-						.appendTo(jobName);
-				});
+(function() {
+	function updateJobList() {
+		jQuery('#jobName').attr("disabled", false);
+		jQuery('#jobName').css("display", "none");
+		jQuery('#waitImage').css("display", "block");
+		jQuery.ajax({
+			type: 'GET',
+			dataType: 'json',
+			url: '${req.contextPath}/rest/hudson/2.0/server/' + jQuery('#hudsonId').val() + '/listJobs',
+			success: function(data) {
+				var jobName = jQuery('#jobName');
+				jobName.empty();
+				if (data !== undefined) {
+					jQuery(data).each(function() {
+						jQuery('<option/>')
+							.attr({value: this.name})
+							.text(this.name)
+							.appendTo(jobName);
+					});
+				}
+				jQuery('#waitImage').css("display", "none");
+				jQuery('#jobName').css("display", "block");
 			}
-			jQuery('#waitImage').css("display", "none");
-			jQuery('#jobName').css("display", "block");
-		}
+		});
+	}
+	var hudsonId = jQuery('#hudsonId');
+	hudsonId.change(function() {
+		updateJobList();
 	});
-}
-jQuery('#hudsonId').change(function() {
-	updateJobList();
-});
+	if (hudsonId.find('option').length == 2) {
+		var lastOption = hudsonId.find('option:last');
+		hudsonId.val(lastOption.val());
+		hudsonId.change();
+		hudsonId.parent().append(jQuery('<b/>').text(lastOption.text()));
+		hudsonId.hide();
+		hudsonId.parents('tr:first').find('.icon').hide();
+	}
+})();
 </script>
